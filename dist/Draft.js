@@ -6333,8 +6333,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var contentStyle = {
 	      outline: 'none',
-	      // fixes Safari bug that disables focus when parent div is draggable. See #1326 
+	      // fix parent-draggable Safari bug. #1326
 	      userSelect: 'text',
+	      WebkitUserSelect: 'text',
 	      whiteSpace: 'pre-wrap',
 	      wordWrap: 'break-word'
 	    };
