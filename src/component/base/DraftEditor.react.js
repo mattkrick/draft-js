@@ -365,13 +365,14 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
     const alreadyHasFocus = editorState.getSelection().getHasFocus();
     const editorNode = ReactDOM.findDOMNode(this.refs.editor);
 
-    const scrollParent = Style.getScrollParent(editorNode);
-    const {x, y} = scrollPosition || getScrollPosition(scrollParent);
-
     invariant(
       editorNode instanceof HTMLElement,
       'editorNode is not an HTMLElement',
     );
+
+    const scrollParent = Style.getScrollParent(editorNode);
+    const {x, y} = scrollPosition || getScrollPosition(scrollParent);
+
     editorNode.focus();
 
     // Restore scroll position
