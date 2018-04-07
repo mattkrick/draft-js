@@ -75,6 +75,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
     readOnly: false,
     spellCheck: false,
     stripPastedStyles: false,
+    style: {},
   };
 
   _blockSelectEvents: boolean;
@@ -194,6 +195,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
         editorState: this.props.editorState,
         textAlignment: this.props.textAlignment,
         accessibilityID: this._placeholderAccessibilityID,
+        style: this.props.style,
       };
 
       return <DraftEditorPlaceholder {...placeHolderProps} />;
@@ -210,6 +212,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
       customStyleMap,
       editorState,
       readOnly,
+      style,
       textAlignment,
       textDirectionality,
     } = this.props;
@@ -228,6 +231,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
       WebkitUserSelect: 'text',
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
+      ...style,
     };
 
     // The aria-expanded and aria-haspopup properties should only be rendered
@@ -388,7 +392,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
     // cursor at the first character. This is something you don't expect when
     // you're clicking on an input element but not directly on a character.
     // Put the cursor back where it was before the blur.
-    if (!alreadyHasFocus) {
+    if (!alreadyHasFocus && !this.props.readOnly) {
       this.update(
         EditorState.forceSelection(editorState, editorState.getSelection()),
       );
